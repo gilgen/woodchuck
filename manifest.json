@@ -1,0 +1,21 @@
+{
+  "name": "Precision Nutrition / Gmail Integration",
+  "description": "Integrates Precision Nutrition details into Gmail",
+  "version": "1.0",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "vendor/jquery.js",
+    "vendor/gmail.js",
+    "squawker.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": [
+        "injector.js",
+        "viewport.js",
+        "listener.js"
+      ]
+    }
+  ]
+}
