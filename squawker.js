@@ -5,13 +5,13 @@ window.WoodchuckSquawker = function() {
 
   this.start = function() {
     self.addObservers();
-    if(self.gmail.check.is_inside_email()) {
+    if(self.isInEmail()) {
       self.emailOpened();
     }
   };
 
   this.isInEmail = function() {
-    self.gmail.check.is_inside_email();
+    return self.gmail.check.is_inside_email();
   };
 
   this.addObservers = function() {
