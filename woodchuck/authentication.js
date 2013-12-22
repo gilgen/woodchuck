@@ -16,10 +16,7 @@ Woodchuck.prototype.login = function(email, password) {
     type: 'POST',
     dataType: 'json',
     data: {
-      user: {
-        email: email,
-        password: password
-      }
+      user: { email: email, password: password }
     }
   });
 

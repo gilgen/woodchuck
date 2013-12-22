@@ -2,7 +2,6 @@ console.log("Woodchuck >> viewport");
 
 Woodchuck.prototype.rootElement = '.Bu.y3';
 Woodchuck.prototype.logoPath = chrome.extension.getURL("images/logo.jpg");
-Woodchuck.prototype.$el = $(Woodchuck.prototype.rootElement);
 Woodchuck.prototype.userData = {};
 
 Woodchuck.prototype.updateCustomer = function(opts) {
@@ -67,6 +66,11 @@ Woodchuck.prototype.showLoginForm = function() {
   });
 };
 
+Woodchuck.prototype.resetLoginForm = function() {
+  $(this.rootElement).find('#pn-password, #pn-email').removeClass('error');
+  $(this.rootElement).find('.errors').empty();
+};
+
 Woodchuck.prototype.loginFormSubmitted = function(event) {
   var email = $('#pn-email').val(),
     password = $('#pn-password').val(),
@@ -75,9 +79,8 @@ Woodchuck.prototype.loginFormSubmitted = function(event) {
   event.preventDefault();
   event.stopPropagation();
 
-  $('#pn-email').removeClass('error');
-  $('#pn-password').removeClass('error');
-  $('.precision-nutrition .errors').empty();
+  this.resetLoginForm();
+
   if(!email) $('#pn-email').addClass('error');
   if(!password) $('#pn-password').addClass('error');
   if(!email || !password) return false;
@@ -85,12 +88,12 @@ Woodchuck.prototype.loginFormSubmitted = function(event) {
   this.login(email, password).then(
     function(data, status, xhr) {
       console.log("Woodchuck >> login submit came back successful", data);
+      // TODO: Store the bearer token and pull the relevant
+      // this.userData from the PN server.
     },
     function(xhr, status, error) {
-      'https://es-uat.precisionnutrition.com/users/sign_in'
       $(self.rootElement).find('.errors').text('Login failed :(');
     }
   );
 
-  console.log("Woodchuck >> submitted login form", email, password);
 };
