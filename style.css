@@ -7,5 +7,12 @@
 
 .precision-nutrition .logo {
   width: 50px;
-  float: right;
+}
+
+.precision-nutrition .error {
+  border: 1px dotted red;
+}
+
+.precision-nutrition .errors {
+  color: red;
 }

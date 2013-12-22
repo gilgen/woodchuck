@@ -5,9 +5,7 @@ window.WoodchuckSquawker = function() {
 
   this.start = function() {
     self.addObservers();
-    if(self.isInEmail()) {
-      self.emailOpened();
-    }
+    if(self.isInEmail()) self.emailOpened();
   };
 
   this.isInEmail = function() {

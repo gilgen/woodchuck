@@ -1,3 +1,5 @@
+console.log("Woodchuck >> injector");
+
 Woodchuck.prototype.inject = function() {
 
   // This little block of code injects the required libraries directly

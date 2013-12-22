@@ -20,8 +20,8 @@
         "woodchuck.js",
         "woodchuck/authentication.js",
         "woodchuck/listener.js",
-        "woodchuck/injector.js",
-        "woodchuck/viewport.js"
+        "woodchuck/viewport.js",
+        "woodchuck/injector.js"
       ]
     }
   ]

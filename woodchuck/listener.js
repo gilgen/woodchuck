@@ -1,3 +1,5 @@
+console.log("Woodchuck >> listener");
+
 Woodchuck.prototype.addListeners = function() {
   console.log("Woodchuck >> listening for squawks...");
 
@@ -14,10 +16,10 @@ Woodchuck.prototype.addListeners = function() {
 
 Woodchuck.prototype.actions = {
   openEmail: function(data) {
-    var address = data.recipients[0][1];
-    var name = data.recipients[0][0] || address;
-    console.log("Woodchuck >> listener received: ", address);
-    this.updateCustomer({ name: name, address: address});
+    var email = data.recipients[0][1];
+    var name = data.recipients[0][0] || email;
+    console.log("Woodchuck >> listener received: ", email);
+    this.updateCustomer({ name: name, email: email});
   }
 };
 
