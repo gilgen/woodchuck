@@ -1,0 +1,11 @@
+.precision-nutrition {
+  font-family: courier;
+  border: 5px solid lightgrey;
+  padding: 5px;
+  margin: 2px;
+}
+
+.precision-nutrition .logo {
+  width: 50px;
+  float: right;
+}

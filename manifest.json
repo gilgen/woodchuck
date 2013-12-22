@@ -7,7 +7,9 @@
     "vendor/jquery.js",
     "vendor/gmail.js",
     "lib/camelize.js",
-    "squawker.js"
+    "squawker.js",
+    "style.css",
+    "images/logo.jpg"
   ],
   "content_scripts": [
     {
@@ -15,9 +17,10 @@
       "js": [
         "vendor/jquery.js",
         "vendor/yepnope.min.js",
-        "injector.js",
-        "viewport.js",
-        "listener.js"
+        "woodchuck.js",
+        "woodchuck/authentication.js",
+        "woodchuck/listener.js",
+        "woodchuck/viewport.js"
       ]
     }
   ]
