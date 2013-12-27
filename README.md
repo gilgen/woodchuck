@@ -14,16 +14,16 @@ available unless it's directly injected.
 ## woodchuck.js
 Bootstraps the extension into Gmail
 
-## woodchuck/authentication.js
+### woodchuck/authentication.js
 Authentication related functionality.
 
-## woodchuck/injector.js
+### woodchuck/injector.js
 Injects required javascript into the host page (Gmail).
 
-## woodchuck/viewport.js
+### woodchuck/viewport.js
 The extension's front end which takes care of injecting into the host page's
 DOM and keeping things in sync.
 
-## woodchuck/listener.js
+### woodchuck/listener.js
 Methods to listen for events from the squawker and dispatches them appropriately
 
