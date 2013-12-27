@@ -1,12 +1,14 @@
 console.log("Woodchuck >> authentication");
 
-Woodchuck.prototype.loginEndpoint = 'https://es-uat.precisionnutrition.com/users/sign_in';
+Woodchuck.prototype.loginEndpoint =
+  'https://es-uat.precisionnutrition.com/users/sign_in.json';
 
 Woodchuck.prototype.isLoggedIn = function() {
   return !!this.bearerToken();
 };
 
-Woodchuck.prototype.bearerToken = function() {
+Woodchuck.prototype.bearerToken = function(token) {
+  if(token) localStorage.pn_bearer_token = token;
   return localStorage.pn_bearer_token;
 };
 

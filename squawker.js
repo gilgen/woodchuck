@@ -1,20 +1,20 @@
-window.WoodchuckSquawker = function() {
+window.Squawker = function() {
 
   this.gmail = Gmail();
   var self = this;
 
   this.start = function() {
-    self.addObservers();
-    if(self.isInEmail()) self.emailOpened();
+    this.addObservers();
+    if(this.isInEmail()) this.emailOpened();
   };
 
   this.isInEmail = function() {
-    return self.gmail.check.is_inside_email();
+    return this.gmail.check.is_inside_email();
   };
 
   this.addObservers = function() {
     console.log("Woodchuck >> initializing squawker observers");
-    self.gmail.observe.on('open_email', function(id) {
+    this.gmail.observe.on('open_email', function(id) {
       setTimeout(function() { self.emailOpened(); }, 200);
     });
   };
@@ -39,6 +39,6 @@ window.WoodchuckSquawker = function() {
 
 $(function() {
   console.log("Woodchuck >> initializing squawker");
-  var squawker = new WoodchuckSquawker();
+  var squawker = new Squawker();
   squawker.start();
 });

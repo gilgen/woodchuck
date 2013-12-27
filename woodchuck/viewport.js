@@ -2,51 +2,65 @@ console.log("Woodchuck >> viewport");
 
 Woodchuck.prototype.rootElement = '.Bu.y3';
 Woodchuck.prototype.logoPath = chrome.extension.getURL("images/logo.jpg");
-Woodchuck.prototype.userData = {};
+Woodchuck.prototype.userData = { email: 'n/a', name: 'n/a' };
 
 Woodchuck.prototype.updateCustomer = function(opts) {
+  var self = this;
+
   if(!this.isLoggedIn()) {
     this.showLoginForm();
     return false;
   }
 
-  if(this.userData.email == opts.email) {
-    this.updateCustomerView();
+  if(opts && opts.email && opts.email === this.userData.email) {
+    this.updateCustomerView(self.userData.html);
   }
   else {
-    // TODO: Make the setting of userData and
-    // updateCustomerView part of a success handler
-    this.userData = {
-      name: opts.name,
-      email: opts.email
-    };
-    this.updateCustomerView();
+    if(opts) this.userData = opts;
 
-    // $.ajax({
-    //   url: 'https://www.google.ca',
-    //   type: 'GET',
-    //   success: function(data) {
-    //     // Update the view with the HTML that comes back
-    //     console.log("customer data came back: ", data);
-    //   },
-    //   dataType: 'html'
-    // });
+    // Update the view to show we're loading user info
+    $(this.rootElement).html(
+      '<div class="precision-nutrition">' +
+        '<img class="logo" src="' + this.logoPath + '"></img>' +
+        '<p>Pulling data for ' + this.userData.name + '</p>' +
+      '</div>'
+    );
+
+    // Do the request and update the view with the data that comes in
+    $.ajax({
+      url: 'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' + this.userData.email,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Authorization", "Bearer " + self.bearerToken());
+      },
+      success: function(data) {
+        console.log("Successful pull of user data: ", data);
+        self.userData.html = data;
+        self.updateCustomerView(data);
+      }
+    });
   }
 };
 
-Woodchuck.prototype.updateCustomerView = function() {
-  console.log("Woodchuck >> updating customer view");
-  $(this.rootElement).html(
-    '<div class="precision-nutrition">' +
-      '<img class="logo" src="' + this.logoPath + '"></img>' +
-      '<p>Pulling data for ' + this.userData.name + '</p>' +
-    '</div>'
-  );
+Woodchuck.prototype.userInfoUrl = function(opts) {
+  return 'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' + opts.email;
+};
+
+Woodchuck.prototype.updateCustomerView = function(data) {
+  console.log("Woodchuck >> updating customer view", data);
+  $(this.rootElement).html(data);
+};
+
+Woodchuck.prototype.isOnLoginForm = function() {
+  return !!$(this.rootElement).find('.login').length
 };
 
 Woodchuck.prototype.showLoginForm = function() {
   console.log("Woodchuck >> rendering login form");
   var self = this;
+
+  // Don't re-render the login form if we're already on it
+  if(this.isOnLoginForm()) return;
+
   $(this.rootElement).html(
     '<div class="precision-nutrition">' +
       '<img class="logo" src="' + this.logoPath + '"></img>' +
@@ -88,8 +102,8 @@ Woodchuck.prototype.loginFormSubmitted = function(event) {
   this.login(email, password).then(
     function(data, status, xhr) {
       console.log("Woodchuck >> login submit came back successful", data);
-      // TODO: Store the bearer token and pull the relevant
-      // this.userData from the PN server.
+      self.bearerToken(data.token);
+      self.updateCustomer();
     },
     function(xhr, status, error) {
       $(self.rootElement).find('.errors').text('Login failed :(');
