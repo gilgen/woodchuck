@@ -12,7 +12,7 @@ gmail JS library that's used needs access to Gmail's JS which is not
 available unless it's directly injected.
 
 ## woodchuck.js
-Bootstraps the extension into Gmail
+Bootstraps the extension.
 
 ### woodchuck/authentication.js
 Authentication related functionality.
