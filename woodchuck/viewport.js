@@ -8,6 +8,7 @@ Woodchuck.prototype.updateCustomer = function(opts) {
   var self = this;
 
   if(!this.isLoggedIn()) {
+    if(opts) this.userData = opts;
     this.showLoginForm();
     return false;
   }
@@ -28,12 +29,12 @@ Woodchuck.prototype.updateCustomer = function(opts) {
 
     // Do the request and update the view with the data that comes in
     $.ajax({
-      url: 'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' + this.userData.email,
+      url: this.userInfoUrl(),
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + self.bearerToken());
       },
       success: function(data) {
-        console.log("Successful pull of user data: ", data);
+        console.log("Woodchuck >> Successful pull of user data");
         self.userData.html = data;
         self.updateCustomerView(data);
       }
@@ -41,12 +42,15 @@ Woodchuck.prototype.updateCustomer = function(opts) {
   }
 };
 
-Woodchuck.prototype.userInfoUrl = function(opts) {
-  return 'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' + opts.email;
+Woodchuck.prototype.userInfoUrl = function() {
+  var url =
+    'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' +
+    this.userData.email;
+  return url;
 };
 
 Woodchuck.prototype.updateCustomerView = function(data) {
-  console.log("Woodchuck >> updating customer view", data);
+  console.log("Woodchuck >> updating customer view");
   $(this.rootElement).html(data);
 };
 
@@ -101,7 +105,7 @@ Woodchuck.prototype.loginFormSubmitted = function(event) {
 
   this.login(email, password).then(
     function(data, status, xhr) {
-      console.log("Woodchuck >> login submit came back successful", data);
+      console.log("Woodchuck >> login submit came back successful");
       self.bearerToken(data.token);
       self.updateCustomer();
     },
