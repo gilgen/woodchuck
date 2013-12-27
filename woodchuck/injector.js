@@ -10,7 +10,7 @@ Woodchuck.prototype.inject = function() {
       chrome.extension.getURL("lib/camelize.js"),
       chrome.extension.getURL("vendor/jquery.js"),
       chrome.extension.getURL("vendor/gmail.js"),
-      chrome.extension.getURL("style.css"),
+      chrome.extension.getURL("assets/css/style.css"),
       chrome.extension.getURL("squawker.js")
     ]
   });

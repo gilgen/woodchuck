@@ -8,8 +8,8 @@
     "vendor/gmail.js",
     "lib/camelize.js",
     "squawker.js",
-    "style.css",
-    "images/logo.jpg"
+    "assets/css/style.css",
+    "assets/images/logo.jpg"
   ],
   "content_scripts": [
     {
