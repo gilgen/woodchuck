@@ -1,7 +1,7 @@
 console.log("Woodchuck >> viewport");
 
 Woodchuck.prototype.rootElement = '.Bu.y3';
-Woodchuck.prototype.logoPath = chrome.extension.getURL("assets/images/logo.jpg");
+Woodchuck.prototype.logoPath = chrome.extension.getURL("assets/images/logo48.png");
 Woodchuck.prototype.userData = { email: 'n/a', name: 'n/a' };
 
 Woodchuck.prototype.updateCustomer = function(opts) {

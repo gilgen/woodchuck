@@ -3,13 +3,18 @@
   "description": "Integrates Precision Nutrition details into Gmail",
   "version": "1.0",
   "manifest_version": 2,
+  "icons": {
+    "16": "assets/images/logo16.png",
+    "48": "assets/images/logo48.png",
+    "128": "assets/images/logo128.png"
+  },
   "web_accessible_resources": [
     "vendor/jquery.js",
     "vendor/gmail.js",
     "lib/camelize.js",
     "squawker.js",
     "assets/css/style.css",
-    "assets/images/logo.jpg"
+    "assets/images/logo48.png"
   ],
   "content_scripts": [
     {

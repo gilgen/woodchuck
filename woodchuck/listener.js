@@ -11,7 +11,6 @@ Woodchuck.prototype.addListeners = function() {
     var eventName = event.data.type.substr(10);
     self.actions[eventName].apply(self, [event.data.data]);
   }, false);
-
 };
 
 Woodchuck.prototype.actions = {
