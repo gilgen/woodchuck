@@ -1,6 +1,7 @@
 console.log("Woodchuck >> viewport");
 
 Woodchuck.prototype.rootElement = '.Bu.y3';
+Woodchuck.prototype.headStyleClass = 'pn-style'
 Woodchuck.prototype.logoPath = chrome.extension.getURL("assets/images/logo48.png");
 Woodchuck.prototype.userData = { email: 'n/a', name: 'n/a' };
 
@@ -14,7 +15,7 @@ Woodchuck.prototype.updateCustomer = function(opts) {
   }
 
   if(opts && opts.email && opts.email === this.userData.email) {
-    this.updateCustomerView(self.userData.html);
+    this.updateCustomerView(this.userData.html);
   }
   else {
     if(opts) this.userData = opts;
@@ -28,30 +29,45 @@ Woodchuck.prototype.updateCustomer = function(opts) {
     );
 
     // Do the request and update the view with the data that comes in
+    console.log("Woodchuck >> pulling user data for " + this.userData.email);
     $.ajax({
       url: this.userInfoUrl(),
+      dataType: 'json',
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + self.bearerToken());
       },
+      error: function() {
+        console.log("Woodchuck >> error pulling user info");
+      },
       success: function(data) {
         console.log("Woodchuck >> Successful pull of user data");
-        self.userData.html = data;
-        self.updateCustomerView(data);
+        self.userData.html = data.html;
+        self.setStyle(data.css);
+        self.updateCustomerView(data.html);
+        eval(data.js);
       }
     });
   }
 };
 
+Woodchuck.prototype.setStyle = function(css) {
+  if(!$('.' + this.headStyleClass).length) {
+    $('head').append(
+      '<style class="' + this.headStyleClass + '">' + css + '</style>'
+    );
+  }
+};
+
 Woodchuck.prototype.userInfoUrl = function() {
   var url =
-    'https://es-uat.PrecisionNutrition.com/api/v1/gmail?email=' +
+    'https://es-uat.PrecisionNutrition.com/api/v1/gmail.js?email=' +
     this.userData.email;
   return url;
 };
 
-Woodchuck.prototype.updateCustomerView = function(data) {
+Woodchuck.prototype.updateCustomerView = function(html) {
   console.log("Woodchuck >> updating customer view");
-  $(this.rootElement).html(data);
+  $(this.rootElement).html(html);
 };
 
 Woodchuck.prototype.isOnLoginForm = function() {
