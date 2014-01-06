@@ -16,3 +16,14 @@
 .precision-nutrition .errors {
   color: red;
 }
+
+.options h2
+{
+  margin-bottom: 0px;
+}
+
+.options #status
+{
+  font-size: 150%;
+  color: green;
+}

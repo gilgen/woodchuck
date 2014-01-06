@@ -1,7 +1,7 @@
 console.log("Woodchuck >> authentication");
 
 Woodchuck.prototype.loginEndpoint =
-  'https://es-uat.precisionnutrition.com/users/sign_in.json';
+  this.host_url + '/users/sign_in.json';
 
 Woodchuck.prototype.isLoggedIn = function() {
   return !!this.bearerToken();
