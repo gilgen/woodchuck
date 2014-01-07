@@ -16,6 +16,9 @@ Woodchuck.prototype.updateCustomer = function(opts) {
 
   if(opts && opts.email && opts.email === this.userData.email) {
     this.updateCustomerView(this.userData.html);
+    setTimeout( function() {
+      eval(self.userData.js);
+    }, 1);
   }
   else {
     if(opts) this.userData = opts;
@@ -42,9 +45,12 @@ Woodchuck.prototype.updateCustomer = function(opts) {
       success: function(data) {
         console.log("Woodchuck >> Successful pull of user data");
         self.userData.html = data.html;
+        self.userData.js = data.js;
         self.setStyle(data.css);
         self.updateCustomerView(data.html);
-        eval(data.js);
+        setTimeout( function() {
+          eval(data.js);
+        }, 1);
       }
     });
   }
