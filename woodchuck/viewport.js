@@ -1,7 +1,7 @@
 console.log("Woodchuck >> viewport");
 
 Woodchuck.prototype.rootElement = '.Bu.y3';
-Woodchuck.prototype.headStyleClass = 'pn-style'
+Woodchuck.prototype.headStyleClass = 'pn-style';
 Woodchuck.prototype.logoPath = chrome.extension.getURL("assets/images/logo48.png");
 Woodchuck.prototype.userData = { email: 'n/a', name: 'n/a' };
 
@@ -66,7 +66,7 @@ Woodchuck.prototype.setStyle = function(css) {
 
 Woodchuck.prototype.userInfoUrl = function() {
   var url =
-    'https://es-uat.PrecisionNutrition.com/api/v1/gmail.js?email=' +
+    this.host_url + '/api/v1/gmail.js?email=' +
     this.userData.email;
   return url;
 };
@@ -89,7 +89,7 @@ Woodchuck.prototype.showLoginForm = function() {
 
   $(this.rootElement).html(
     '<div class="precision-nutrition">' +
-      '<img class="logo" src="' + this.logoPath + '"></img>' +
+      '<img alt="PN Hexagon" class="logo" src="' + this.logoPath + '" />' +
       '<div class="errors"></div>' +
       '<form class="login">' +
         '<label for="pn-email" class="clearfix">Email</label><br />' +

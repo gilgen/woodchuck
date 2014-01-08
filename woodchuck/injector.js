@@ -7,8 +7,8 @@ Woodchuck.prototype.inject = function() {
   // have access to variables and APIs on the host page.
   yepnope({
     load: [
-      chrome.extension.getURL("lib/camelize.js"),
       chrome.extension.getURL("vendor/jquery.js"),
+      chrome.extension.getURL("vendor/sugar.min.js"),
       chrome.extension.getURL("vendor/gmail.js"),
       chrome.extension.getURL("assets/css/style.css"),
       chrome.extension.getURL("squawker.js")

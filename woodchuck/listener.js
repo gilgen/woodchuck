@@ -15,10 +15,8 @@ Woodchuck.prototype.addListeners = function() {
 
 Woodchuck.prototype.actions = {
   openEmail: function(data) {
-    var email = data.recipients[0][1];
-    var name = data.recipients[0][0] || email;
-    console.log("Woodchuck >> listener received: ", email);
-    this.updateCustomer({ name: name, email: email});
+    console.log("Woodchuck >> listener received: ", data.email);
+    this.updateCustomer(data);
   }
 };
 
