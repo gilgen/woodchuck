@@ -1,7 +1,7 @@
 {
   "name": "Precision Nutrition / Gmail Integration",
   "description": "Integrates Precision Nutrition details into Gmail",
-  "options_page": "options.html",
+  "options_page": "options/options.html",
   "version": "1.0",
   "manifest_version": 2,
   "icons": {
