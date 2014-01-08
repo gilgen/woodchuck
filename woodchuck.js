@@ -4,9 +4,8 @@ window.Woodchuck = function() {
     this.inject();
   };
 
-  var hostname = localStorage.getItem('es_hostname')
-  if (!hostname)
-  {
+  var hostname = localStorage.getItem('es_hostname');
+  if (!hostname) {
     localStorage.setItem('es_hostname', 'https://es-uat.precisionnutrition.com');
   }
   this.host_url = localStorage.getItem('es_hostname');
@@ -18,4 +17,3 @@ $(function() {
   var woodchuck = new Woodchuck();
   woodchuck.start();
 });
-
