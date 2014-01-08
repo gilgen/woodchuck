@@ -20,6 +20,5 @@ function restore_options() {
   document.getElementById("hostname").value = es_hostname;
 }
 
-
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#save').addEventListener('click', save_options);
