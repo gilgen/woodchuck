@@ -5,6 +5,10 @@
   margin: 2px;
 }
 
+.precision-nutrition .nonstandard-host-warning {
+  color: red;
+  font-size: 65%;
+}
 .precision-nutrition .logo {
   width: 50px;
 }
