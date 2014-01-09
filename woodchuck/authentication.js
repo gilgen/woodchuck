@@ -1,7 +1,7 @@
 console.log("Woodchuck >> authentication");
 
 Woodchuck.prototype.loginEndpoint =
-  this.host_url + '/users/sign_in.json';
+  this.hostUrl + '/users/sign_in.json';
 
 Woodchuck.prototype.isLoggedIn = function() {
   return !!this.bearerToken();

@@ -23,9 +23,18 @@ Woodchuck.prototype.updateCustomer = function(opts) {
   else {
     if(opts) this.userData = opts;
 
+    // If we've manually specified a URL using localStorage, warn that it's nonstandard
+    if (this.defaultHostUrl != this.hostUrl) {
+      url = this.hostUrl.replace('https://','').replace('.precisionnutrition.com','');
+      warningString = '<p class="nonstandard-host-warning">Warning: using ' + url + "</p>";
+    } else {
+      warningString = ''
+    }
+
     // Update the view to show we're loading user info
     $(this.rootElement).html(
       '<div class="precision-nutrition">' +
+        warningString +
         '<img class="logo" src="' + this.logoPath + '"></img>' +
         '<p>Pulling data for ' + this.userData.name + '</p>' +
       '</div>'
@@ -66,7 +75,7 @@ Woodchuck.prototype.setStyle = function(css) {
 
 Woodchuck.prototype.userInfoUrl = function() {
   var url =
-    this.host_url + '/api/v1/gmail.js?email=' +
+    this.hostUrl + '/api/v1/gmail.js?email=' +
     this.userData.email;
   return url;
 };
